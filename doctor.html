@@ -1,0 +1,251 @@
+<!-- MultipleFiles/doctor.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Portal - QuickCure</title>
+    <link rel="stylesheet" href="doctor.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- AuthManager must be loaded before doctor.js -->
+    <script src="auth.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+           <div class="logo">
+                <img src="QuickCureLogo.png" alt="QuickCure Logo" class="logo-img">
+                <h1>QuickCure</h1>
+            </div>
+            <nav class="nav">
+                <a href="#patients">
+                    <i class="fas fa-users"></i> <!-- Added icon -->
+                    Patients
+                </a>
+                <a href="doctor-profile.html">
+                    <i class="fas fa-user-md"></i> <!-- Added icon -->
+                    Profile
+                </a>
+                <a href="#" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                </a>
+            </nav>
+            
+            <!-- Mobile Menu Button -->
+            <button id="mobileMenuBtn" class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="mobile-menu">
+            <a href="#patients">
+                <i class="fas fa-users"></i>
+                Patients
+            </a>
+            <a href="doctor-profile.html">
+                <i class="fas fa-user-md"></i>
+                Profile
+            </a>
+            <a href="#" class="logout-btn">
+                <i class="fas fa-sign-out-alt"></i>
+                Logout
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Dashboard -->
+    <main class="doctor-dashboard">
+        <div class="container">
+            <!-- Welcome Section -->
+            <section class="welcome-section">
+                <div class="container">
+                    <div class="welcome-header">
+                        <div class="welcome-text">
+                            <h1>Welcome back, <span class="doctor-name"></span>!</h1>
+                            <p>Ready to help your patients today?</p>
+                        </div>
+                        <div class="doctor-avatar">
+                            <i class="fas fa-user-md"></i>
+                        </div>
+                    </div>
+
+            <!-- Digital Prescriptions Section -->
+            <section class="prescriptions-section" id="prescriptions">
+                <div class="section-header">
+                    <h2><i class="fas fa-prescription-bottle-alt"></i> Digital Prescriptions</h2>
+                    <button class="btn btn-primary" id="issuePrescriptionBtn">
+                        <i class="fas fa-plus"></i> Issue New Prescription
+                    </button>
+                </div>
+                <div class="table-container">
+                    <table id="prescriptionTable">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Patient Name</th>
+                                <th>Medicines</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="prescriptionTableBody">
+                            <!-- Prescriptions will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="availability-section" id="availability">
+                <div class="section-header">
+                    <h2><i class="fas fa-clock"></i> Availability Management</h2>
+                    <button class="btn btn-primary" id="addAvailabilityBtn">
+                        <i class="fas fa-plus"></i> Add Availability
+                    </button>
+                </div>
+                <div class="availability-list" id="availabilityList">
+                    <!-- Availability items will be populated by JavaScript -->
+                </div>
+            </section>
+
+            <section class="appointments-section" id="appointments">
+                <div class="section-header">
+                    <h2><i class="fas fa-calendar"></i> Appointment Schedules</h2>
+                    <div class="date-filter">
+                        <input type="date" id="appointmentDate" class="date-picker" placeholder="Select Date">
+                        <select id="appointmentStatus" class="date-picker">
+                            <option value="all">All Status</option>
+                            <option value="pending">Pending</option>
+                            <option value="confirmed">Confirmed</option>
+                            <option value="completed">Completed</option>
+                            <option value="cancelled">Cancelled</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>Patient Name</th>
+                                <th class="hide-mobile">Type</th>
+                                <th class="hide-mobile">Fee</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="appointmentTableBody">
+                            <!-- Appointment data will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+                    <!-- Quick Stats -->
+                    <div class="quick-stats">
+                        <div class="quick-stat-card">
+                            <i class="fas fa-users"></i>
+                            <div class="stat-info">
+                                <h3 id="totalPatients">0</h3>
+                                <p>Total Patients</p>
+                            </div>
+                        </div>
+                        <div class="quick-stat-card">
+                            <i class="fas fa-star"></i>
+                            <div class="stat-info">
+                                <h3 id="doctorRating">0.0</h3>
+                                <p>Rating</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Patients Section -->
+            <section id="patients" class="patients-section">
+                <div class="container">
+                    <div class="section-header">
+                        <h2>
+                            <i class="fas fa-users"></i>
+                            Patient Management
+                        </h2>
+                        <div class="search-filters">
+                            <input type="text" id="patientSearch" placeholder="Search patients...">
+                            <select id="filterSpecialty">
+                                <option value="">All Doctor Specialties</option>
+                                <option value="cardiology">Cardiology</option>
+                                <option value="dermatology">Dermatology</option>
+                                <option value="pediatrics">Pediatrics</option>
+                                <option value="orthopedics">Orthopedics</option>
+                                <option value="neurology">Neurology</option>
+                                <option value="general">General Medicine</option>
+                                <option value="ent">ENT</option>
+                                <option value="psychiatry">Psychiatry</option>
+                                <option value="oncology">Oncology</option>
+                                <option value="radiology">Radiology</option>
+                                <option value="gynecology">Gynecology</option>
+                            </select>
+                            <select id="filterCity">
+                                <option value="">All Doctor Cities</option>
+                                <option value="delhi">Delhi</option>
+                                <option value="mumbai">Mumbai</option>
+                                <option value="bengaluru">Bengaluru</option>
+                                <option value="kolkata">Kolkata</option>
+                                <option value="chennai">Chennai</option>
+                                <option value="hyderabad">Hyderabad</option>
+                                <option value="pune">Pune</option>
+                                <option value="lucknow">Lucknow</option>
+                            </select>
+                            <a href="#" class="btn btn-primary" id="addPatientBtn">
+                                <i class="fas fa-plus"></i>
+                                Add Patient
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Patient Name</th>
+                                    <th>Age</th>
+                                    <th>Last Visit</th>
+                                    <th>Next Appointment</th>
+                                    <th>Condition</th>
+                                    <th>Phone</th>
+                                    <th>Assigned Doctor</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Patient data will be loaded here by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Custom Alert/Notification HTML -->
+    <div id="customAlertContainer"></div>
+
+    <script src="doctor.js"></script>
+        <!-- Footer -->
+     <footer>
+  <p>© 2025 QuickCare. Making healthcare accessible for everyone.</p>
+</footer>
+
+<style>
+  footer {
+    text-align: center;
+    padding: 30px;
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    color: #fff;
+    font-size: 14px;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  }
+</style>
+</body>
+</html>

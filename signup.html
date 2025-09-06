@@ -1,0 +1,306 @@
+<!-- MultipleFiles/signup.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - QuickCure</title>
+    <link rel="stylesheet" href="index.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom Alert Styles - Add this to your main CSS file (e.g., index.css or a dedicated alerts.css) */
+        .custom-alert {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transform: translateX(100%);
+            animation: slideIn 0.5s forwards;
+            opacity: 0;
+        }
+
+        .custom-alert-success {
+            border-left: 5px solid #48bb78;
+            color: #38a169;
+        }
+
+        .custom-alert-error {
+            border-left: 5px solid #e53e3e;
+            color: #e53e3e;
+        }
+
+        .custom-alert-info {
+            border-left: 5px solid #3182ce;
+            color: #3182ce;
+        }
+
+        .custom-alert-icon {
+            font-size: 1.2em;
+        }
+
+        .custom-alert-message {
+            flex-grow: 1;
+        }
+
+        .custom-alert-close {
+            background: none;
+            border: none;
+            font-size: 1.5em;
+            cursor: pointer;
+            color: inherit;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+
+        .custom-alert-close:hover {
+            opacity: 1;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        /* Specific styles for signin/signup forms */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667EEA 0%, #764BA2 100%);
+        }
+        .auth-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 500px; /* Increased max-width for signup form */
+            text-align: center;
+        }
+        .auth-container h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #444;
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            width: calc(100% - 24px);
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: #667EEA;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+        }
+        .btn-auth {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #667EEA, #764BA2);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .btn-auth:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+        .auth-links {
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+        .auth-links a {
+            color: #667EEA;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .auth-links a:hover {
+            text-decoration: underline;
+        }
+        #doctorFields {
+            display: none; /* Hidden by default */
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <h2>Sign Up</h2>
+        <form id="signupForm">
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" placeholder="John Doe" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="your@example.com" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="********" required>
+            </div>
+            <div class="form-group">
+                <label for="role">Register As</label>
+                <select id="role" required>
+                    <option value="patient">Patient</option>
+                    <option value="doctor">Doctor</option>
+                </select>
+            </div>
+
+            <div id="doctorFields">
+                <h3>Doctor Information</h3>
+                <div class="form-group">
+                    <label for="license">Medical License Number</label>
+                    <input type="text" id="license" placeholder="MED123456">
+                </div>
+                <div class="form-group">
+                    <label for="specialization">Specialty</label>
+                    <select id="specialization">
+                        <option value="">-- Select Specialty --</option>
+                        <option value="cardiology">Cardiology</option>
+                        <option value="dermatology">Dermatology</option>
+                        <option value="pediatrics">Pediatrics</option>
+                        <option value="orthopedics">Orthopedics</option>
+                        <option value="neurology">Neurology</option>
+                        <option value="general">General Medicine</option>
+                        <option value="ent">ENT (Ear, Nose, Throat)</option>
+                        <option value="psychiatry">Psychiatry</option>
+                        <option value="oncology">Oncology</option>
+                        <option value="radiology">Radiology</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="experience">Experience (Years)</label>
+                    <input type="number" id="experience" min="0" max="50" placeholder="e.g., 5">
+                </div>
+                <div class="form-group">
+                    <label for="hospitalAffiliation">Hospital Affiliation</label>
+                    <select id="hospitalAffiliation">
+                        <option value="">-- Select Hospital --</option>
+                        <option value="city_general">City General Hospital</option>
+                        <option value="metro_care">Metro Care Clinic</option>
+                        <option value="green_valley">Green Valley Hospital</option>
+                        <option value="apollo">Apollo Speciality</option>
+                        <option value="fortis">Fortis Healthcare</option>
+                        <option value="max_super">Max Super Specialty</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="doctorCity">City</label>
+                    <select id="doctorCity">
+                        <option value="">-- Select City --</option>
+                        <option value="delhi">Delhi</option>
+                        <option value="mumbai">Mumbai</option>
+                        <option value="bengaluru">Bengaluru</option>
+                        <option value="kolkata">Kolkata</option>
+                        <option value="chennai">Chennai</option>
+                        <option value="hyderabad">Hyderabad</option>
+                        <option value="pune">Pune</option>
+                        <option value="lucknow">Lucknow</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="qualification">Qualification</label>
+                    <input type="text" id="qualification" placeholder="e.g., MBBS, MD">
+                </div>
+                <div class="form-group">
+                    <label for="bio">Professional Bio (Optional)</label>
+                    <textarea id="bio" rows="3" placeholder="Brief description of your expertise"></textarea>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-auth">Sign Up</button>
+        </form>
+        <div class="auth-links">
+            Already have an account? <a href="signin.html">Sign In</a>
+        </div>
+    </div>
+
+    <div id="customAlertContainer"></div>
+
+    <script src="auth.js"></script>
+    <script>
+        // Toggle doctor-specific fields dynamically
+        function toggleDoctorFields() {
+            const roleSelect = document.getElementById('role');
+            const doctorFieldsDiv = document.getElementById('doctorFields');
+
+            if (!roleSelect || !doctorFieldsDiv) return;
+
+            const requiredFields = ["license", "specialization", "experience", "hospitalAffiliation", "doctorCity", "qualification"];
+            if (roleSelect.value === 'doctor') {
+                doctorFieldsDiv.style.display = 'block';
+                requiredFields.forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) el.setAttribute('required', 'true');
+                });
+            } else {
+                doctorFieldsDiv.style.display = 'none';
+                requiredFields.forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) el.removeAttribute('required');
+                });
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const signupForm = document.getElementById("signupForm");
+            if (signupForm) {
+                signupForm.addEventListener("submit", (e) => {
+                    e.preventDefault();
+                    const name = document.getElementById("name").value.trim();
+                    const email = document.getElementById("email").value.trim().toLowerCase();
+                    const password = document.getElementById("password").value;
+                    const role = document.getElementById("role").value;
+
+                    const userData = { name, email, password, role };
+
+                    if (role === 'doctor') {
+                        const license = document.getElementById("license")?.value.trim() || '';
+                        const specialty = document.getElementById("specialization")?.value || '';
+                        const experience = parseInt(document.getElementById("experience")?.value, 10) || 0;
+                        const hospitalAffiliation = document.getElementById("hospitalAffiliation")?.value || '';
+                        const doctorCity = document.getElementById("doctorCity")?.value || '';
+                        const qualification = document.getElementById("qualification")?.value.trim() || '';
+                        const bio = document.getElementById("bio")?.value.trim() || '';
+
+                        Object.assign(userData, { license, specialty, experience, hospital: hospitalAffiliation, city: doctorCity, qualification, bio });
+                    }
+                    
+                    AuthManager.signup(userData);
+                });
+
+                toggleDoctorFields(); // Initial call
+                document.getElementById('role')?.addEventListener('change', toggleDoctorFields);
+            }
+        });
+    </script>
+</body>
+</html>

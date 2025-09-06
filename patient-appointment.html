@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Appointment - QuickCure</title>
+    <link rel="stylesheet" href="patient-appointment.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- AuthManager must be loaded before patient-appointment.js -->
+    <script src="auth.js" defer></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <img src="QuickCureLogo.png" alt="QuickCure" class="logo-img">
+                <h1>QuickCure</h1>
+            </div>
+            <nav class="nav">
+                <a href="patient.html">Dashboard</a>
+                <a href="patient-profile.html">My Profile</a>
+                <!-- Removed #book-appointment as it's the current page -->
+                <a href="#" class="logout-btn" id="logoutBtnDesktop">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                </a>
+            </nav>
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle mobile menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+                <a href="patient.html">Dashboard</a>
+                <a href="patient-profile.html">My Profile</a>
+                <!-- Removed #book-appointment as it's the current page -->
+                <a href="#" class="logout-btn" id="logoutBtnMobile">Logout</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="appointment-main">
+        <div class="container">
+            <!-- Page Header -->
+            <section class="page-header">
+                <div class="header-content">
+                    <h1><i class="fas fa-calendar-plus"></i>Book Doctor Appointments Anywhere in India</h1>
+                    <p>Find and book appointments with our healthcare professionals</p>
+                </div>
+                <button class="btn btn-secondary" onclick="window.location.href='patient.html'">
+                    <i class="fas fa-arrow-left"></i>
+                    Back to Dashboard
+                </button>
+            </section>
+
+            <!-- Doctors Grid -->
+            <section class="doctors-section">
+                <div class="doctors-grid" id="doctorsGrid">
+                    <!-- Doctors will be loaded here by patient-appointment.js -->
+                </div>
+                
+                <div class="no-results" id="noResults" style="display: none;">
+                    <i class="fas fa-user-md-slash"></i>
+                    <h3>No doctors found</h3>
+                    <p>Try adjusting your search criteria</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Booking Modal -->
+    <div class="modal" id="bookingModal" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="bookingModalTitle"><i class="fas fa-calendar-plus"></i> Book Appointment</h3>
+                <button class="close-btn" id="closeModal" aria-label="Close booking modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="doctor-summary" id="doctorSummary">
+                    <!-- Doctor summary will be populated here by patient-appointment.js -->
+                </div>
+                
+                <form id="bookingForm">
+                    <input type="hidden" id="selectedDoctorId">
+                    
+                    <div class="form-group">
+                        <label for="appointmentDate">Preferred Date:</label>
+                        <input type="date" id="appointmentDate" required aria-required="true">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="appointmentTime">Preferred Time:</label>
+                        <select id="appointmentTime" required aria-required="true">
+                            <option value="">Select time</option>
+                            <option value="09:00">09:00 AM</option>
+                            <option value="10:00">10:00 AM</option>
+                            <option value="11:00">11:00 AM</option>
+                            <option value="14:00">02:00 PM</option>
+                            <option value="15:00">03:00 PM</option>
+                            <option value="16:00">04:00 PM</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="appointmentReason">Reason for visit:</label>
+                        <textarea id="appointmentReason" rows="3" placeholder="Brief description of your concern..."></textarea>
+                    </div>
+
+                    <div class="modal-actions">
+                        <button type="button" class="btn btn-secondary" id="cancelBooking">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Book Appointment</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal" id="successModal" role="dialog" aria-modal="true" aria-labelledby="successModalTitle">
+        <div class="modal-content">
+            <div class="modal-header success-header">
+                <h3 id="successModalTitle"><i class="fas fa-check-circle"></i> Appointment Booked Successfully!</h3>
+                <button class="close-btn" id="closeSuccessModal" aria-label="Close success modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="appointment-details" id="appointmentDetails">
+                    <!-- Appointment details will be populated here by patient-appointment.js -->
+                </div>
+                <div class="recommendations">
+                    <h4><i class="fas fa-lightbulb"></i> Recommendations for your visit:</h4>
+                    <ul id="recommendationsList">
+                        <!-- Recommendations will be populated here by patient-appointment.js -->
+                    </ul>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" onclick="window.location.href='patient.html'">
+                        <i class="fas fa-home"></i> Back to Dashboard
+                    </button>
+                    <button type="button" class="btn btn-primary" onclick="window.location.href='patient-profile.html#appointments'">
+                        <i class="fas fa-calendar-alt"></i> View My Appointments
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+     <footer>
+  <p>© 2025 QuickCare. Making healthcare accessible for everyone.</p>
+</footer>
+
+<style>
+  footer {
+    text-align: center;
+    padding: 30px;
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    color: #fff;
+    font-size: 14px;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  }
+</style>
+
+    <!-- Notification -->
+    <div class="notification" id="notification" aria-live="polite" aria-atomic="true"></div>
+
+    <script src="patient-appointment.js" defer></script>
+</body>
+</html>

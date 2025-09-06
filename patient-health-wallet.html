@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Wallet - QuickCure</title>
+    <link rel="stylesheet" href="patient.css"> <!-- Reusing patient.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .health-wallet-section {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+        .health-wallet-section h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .wallet-tabs {
+            display: flex;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #eee;
+        }
+        .wallet-tab {
+            padding: 15px 25px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #666;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .wallet-tab.active {
+            color: #667EEA;
+            border-bottom-color: #667EEA;
+        }
+        .wallet-tab:hover {
+            color: #667EEA;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .record-card, .prescription-card {
+            background: #f9fafb;
+            border-left: 4px solid #48bb78;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .record-card h4, .prescription-card h4 {
+            font-size: 1.2rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .record-card p, .prescription-card p {
+            color: #666;
+            margin-bottom: 5px;
+        }
+        .record-card .actions, .prescription-card .actions {
+            margin-top: 15px;
+            text-align: right;
+        }
+        .record-card .actions .btn, .prescription-card .actions .btn {
+            padding: 8px 15px;
+            font-size: 0.9rem;
+            border-radius: 20px;
+        }
+        .no-items-message {
+            text-align: center;
+            padding: 50px;
+            color: #666;
+        }
+        .no-items-message i {
+            font-size: 3rem;
+            color: #cbd5e0;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <img src="QuickCureLogo.png" alt="Quickcure Logo" class="logo-img" />
+                <h1>QuickCure</h1>
+            </div>
+            <nav class="nav">
+                <a href="patient.html">Dashboard</a>
+                <a href="patient-profile.html">Profile</a>
+                <a href="patient-appointment.html">Book Appointment</a>
+                <a href="patient-symptom-checker.html">Symptom Checker</a>
+                <a href="#" id="logoutBtnDesktop" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                </a>
+            </nav>
+            <button id="mobileMenuBtn" class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div id="mobileMenu" class="mobile-menu">
+                <a href="patient.html">Dashboard</a>
+                <a href="patient-profile.html">Profile</a>
+                <a href="patient-appointment.html">Book Appointment</a>
+                <a href="patient-symptom-checker.html">Symptom Checker</a>
+                <a href="#" id="logoutBtnMobile" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="patient-dashboard">
+        <div class="container">
+            <section class="health-wallet-section">
+                <h2><i class="fas fa-wallet"></i> My Health Wallet</h2>
+                <div class="wallet-tabs">
+                    <div class="wallet-tab active" data-tab="prescriptions">Prescriptions</div>
+                    <div class="wallet-tab" data-tab="records">Medical Records</div>
+                </div>
+
+                <div id="prescriptionsContent" class="tab-content active">
+                    <!-- Prescriptions will be loaded here -->
+                    <div class="no-items-message" id="noPrescriptionsMessage">
+                        <i class="fas fa-prescription-bottle-alt"></i>
+                        <p>No digital prescriptions found.</p>
+                    </div>
+                </div>
+
+                <div id="recordsContent" class="tab-content">
+                    <!-- Medical records will be loaded here -->
+                    <div class="no-items-message" id="noRecordsMessage">
+                        <i class="fas fa-file-medical"></i>
+                        <p>No medical records found.</p>
+                        <p>You can upload them in your profile or they will appear after consultations.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <div id="notification" class="notification"></div>
+    <!-- Footer -->
+     <footer>
+  <p>© 2025 QuickCare. Making healthcare accessible for everyone.</p>
+</footer>
+
+<style>
+  footer {
+    text-align: center;
+    padding: 30px;
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    color: #fff;
+    font-size: 14px;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  }
+</style>
+    <script src="auth.js"></script>
+    <script src="patient-health-wallet.js"></script>
+</body>
+</html>

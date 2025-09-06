@@ -1,0 +1,539 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: #f5f7fa;
+    color: #333;
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+/* Header */
+.header {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+}
+
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+}
+
+.logo h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #333;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.nav a {
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav a:hover {
+    color: #667EEA;
+}
+
+.logout-btn {
+    background: #ff6b6b;
+    color: white !important;
+    padding: 10px 20px;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.logout-btn:hover {
+    background: #ff5252;
+    transform: translateY(-2px);
+}
+
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #333;
+    cursor: pointer;
+}
+
+.mobile-menu {
+    display: none;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.98);
+    padding: 20px;
+    gap: 15px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-menu.show {
+    display: flex;
+}
+
+.mobile-menu a {
+    color: #333;
+    text-decoration: none;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.mobile-menu a:last-child {
+    border-bottom: none;
+}
+
+/* Patient Dashboard */
+.patient-dashboard {
+    margin-top: 80px;
+    padding: 20px 0 40px;
+}
+
+/* Welcome Section */
+.welcome-section {
+    background: white;
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+}
+
+.welcome-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.welcome-text h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.patient-avatar i {
+    font-size: 4rem;
+    color: #48bb78;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 25px;
+}
+
+.stat-card {
+    background: #f9fafb;
+    border-radius: 15px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+}
+
+.stat-card i {
+    font-size: 2.5rem;
+    color: #48bb78;
+    margin-bottom: 15px;
+}
+
+.stat-card h3 {
+    font-size: 2rem;
+    margin: 0 0 10px 0;
+    font-weight: 700;
+}
+
+.stat-card p {
+    margin: 0;
+    color: #666;
+}
+
+/* Create Appointment Section */
+.appointment-section { /* Changed from .create-appointment-section */
+    background: white;
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px; /* Added margin-bottom */
+}
+
+.appointment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    /* padding: 0; Removed padding */
+}
+
+.header-text h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0 0 10px 0;
+}
+
+.header-text p {
+    margin: 0;
+    color: #666;
+}
+
+.appointment-icon i {
+    font-size: 3rem;
+    color: #48bb78;
+}
+
+/* Booking Flow Section - Column layout */
+.booking-flow-section {
+    background: rgba(255, 255, 255, 0.98);
+    border-radius: 15px;
+    padding: 40px;
+    margin-top: 30px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.booking-flow-section h2 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 25px;
+    font-weight: 700;
+    text-align: center;
+}
+
+/* Preferences Section */
+.preferences-section {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto 40px auto;
+}
+
+.preferences-section label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #555;
+    text-align: left;
+    margin-top: 20px;
+}
+
+.preferences-section select {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #333;
+    background-color: #f9f9f9;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23666%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13.2-5.4H18.2c-4.8%200-9.3%201.8-12.9%205.4-3.6%203.6-5.4%208.1-5.4%2013.2%200%205.1%201.8%209.6%205.4%2013.2l128%20127.9c3.6%203.6%208.1%205.4%2013.2%205.4s9.6-1.8%2013.2-5.4l128-127.9c3.6-3.6%205.4-8.1%205.4-13.2%200-5.1-1.8-9.6-5.4-13.2z%22%2F%3E%3C%2Fsvg%3E');
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 12px;
+    cursor: pointer;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.preferences-section select:focus {
+    border-color: #667eea;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+}
+
+/* Find Available Doctors Section */
+.find-doctors-section {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.find-doctors-section .btn {
+    margin-top: 20px;
+    padding: 15px 30px;
+    font-size: 1.1rem;
+    border-radius: 30px;
+    min-width: 250px;
+}
+
+/* Quick Info */
+.quick-info {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 40px;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    color: #48bb78;
+    font-size: 1.1rem;
+}
+
+.info-item i {
+    font-size: 1.5rem;
+}
+
+/* Quick Access Section - Updated for 2 cards layout */
+.quick-access-section {
+    background: white;
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.section-header {
+    text-align: center; /* Centered the header */
+}
+
+.section-header h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+.quick-access-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.access-card {
+    background: #f9fafb;
+    border-radius: 15px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.access-card:hover {
+    transform: translateY(-5px);
+}
+
+.access-icon i {
+    font-size: 3rem;
+    color: #48bb78;
+    margin-bottom: 20px;
+}
+
+.access-card h3 {
+    font-size: 1.6rem;
+    margin: 0 0 15px 0;
+    font-weight: 700;
+}
+
+.access-card p {
+    margin: 0 0 20px 0;
+    color: #666;
+    font-size: 1rem;
+}
+
+.access-arrow {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    font-size: 1.2rem;
+    color: #48bb78;
+}
+
+/* Buttons */
+.btn {
+    border: none;
+    cursor: pointer;
+    font-weight: 700;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.btn-primary {
+    background: #48bb78;
+    color: white;
+    border-radius: 30px;
+    padding: 12px 25px;
+}
+
+.btn-primary:hover {
+    background: #38a169;
+    transform: translateY(-2px);
+}
+
+/* Notification */
+.notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #48bb78;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    display: none;
+    font-weight: 600;
+    z-index: 1000;
+    animation: slideIn 0.3s ease forwards;
+}
+
+.notification.error {
+    background: #ef4444;
+}
+
+.notification.show {
+    display: block;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .welcome-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .patient-avatar {
+        margin-top: 20px;
+    }
+
+    .appointment-header {
+        flex-direction: column;
+        align-items: flex-start;
+        /* padding: 0; Removed padding */
+    }
+
+    .appointment-icon {
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav {
+        display: none;
+    }
+
+    .mobile-menu-btn {
+        display: block;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    }
+
+    .booking-flow-section {
+        padding: 30px 20px;
+    }
+
+    .preferences-section,
+    .find-doctors-section {
+        max-width: 100%;
+    }
+
+    .preferences-section select {
+        max-width: 100%;
+    }
+
+    .find-doctors-section .btn {
+        min-width: 100%;
+    }
+
+    .booking-flow-section h2 {
+        font-size: 1.8rem;
+    }
+
+    .quick-access-grid {
+        grid-template-columns: 1fr;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .welcome-section,
+    .appointment-section, /* Changed from .create-appointment-section */
+    .quick-access-section {
+        padding: 30px 20px;
+    }
+
+    .welcome-text h1 {
+        font-size: 2rem;
+    }
+
+    .appointment-header {
+        flex-direction: column;
+        align-items: flex-start;
+        /* padding: 0; Removed padding */
+    }
+
+    .appointment-icon {
+        margin-top: 20px;
+    }
+
+    .booking-flow-section h2 {
+        font-size: 1.5rem;
+    }
+
+    .quick-info {
+        flex-direction: column;
+        gap: 15px;
+    }
+}

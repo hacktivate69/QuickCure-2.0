@@ -1,0 +1,379 @@
+<!-- MultipleFiles/doctor-profile.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Profile - QuickCure</title>
+    <link rel="stylesheet" href="doctor-profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- AuthManager must be loaded before doctor-profile.js -->
+    <script src="auth.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <!-- Assuming QuickCureLogo.png is an image, if it's an icon, use <i> tag -->
+                <img src="QuickCureLogo.png" alt="QuickCure Logo" class="logo-img">
+                <h1>QuickCure</h1>
+            </div>
+            <nav class="nav">
+                <a href="doctor.html">Dashboard</a>
+                <a href="#profile">Profile</a>
+                <a href="#availability">Availability</a>
+                <a href="#appointments">Appointments</a>
+                <a href="#prescriptions">Prescriptions</a>
+                <a href="#" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                </a>
+            </nav>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="doctor.html">Dashboard</a>
+            <a href="#profile">Profile</a>
+            <a href="#availability">Availability</a>
+            <a href="#appointments">Appointments</a>
+            <a href="#prescriptions">Prescriptions</a>
+            <a href="#" class="logout-btn">
+                <i class="fas fa-sign-out-alt"></i>
+                Logout
+            </a>
+        </div>
+    </header>
+
+    <main class="doctor-profile">
+        <div class="container">
+            <div class="profile-header">
+                <h1>Doctor Profile</h1>
+                <p>Manage your professional information</p>
+            </div>
+
+            <section class="profile-details-section" id="profile">
+                <div class="section-header">
+                    <h2><i class="fas fa-user"></i> Profile Details</h2>
+                    <button class="btn btn-primary" id="editProfileBtn">
+                        <i class="fas fa-edit"></i> Edit Profile
+                    </button>
+                </div>
+                <div class="profile-card">
+                    <div class="profile-avatar">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                    <div class="profile-info">
+                        <div class="info-row">
+                            <label>Name:</label>
+                            <span id="profileName"></span>
+                        </div>
+                        <div class="info-row">
+                            <label>Speciality:</label>
+                            <span id="profileSpeciality"></span>
+                        </div>
+                        <div class="info-row">
+                            <label>Experience:</label>
+                            <span id="profileExperience"></span>
+                        </div>
+                        <div class="info-row">
+                            <label>Email:</label>
+                            <span id="profileEmail"></span>
+                        </div>
+                        <div class="info-row">
+                            <label>Phone:</label>
+                            <span id="profilePhone"></span>
+                        </div>
+                        <div class="info-row">
+                            <label>Address:</label>
+                            <span id="profileAddress"></span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Digital Prescriptions Section -->
+            <section class="prescriptions-section" id="prescriptions">
+                <div class="section-header">
+                    <h2><i class="fas fa-prescription-bottle-alt"></i> Digital Prescriptions</h2>
+                    <button class="btn btn-primary" id="issuePrescriptionBtn">
+                        <i class="fas fa-plus"></i> Issue New Prescription
+                    </button>
+                </div>
+                <div class="table-container">
+                    <table id="prescriptionTable">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Patient Name</th>
+                                <th>Medicines</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="prescriptionTableBody">
+                            <!-- Prescriptions will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="availability-section" id="availability">
+                <div class="section-header">
+                    <h2><i class="fas fa-clock"></i> Availability Management</h2>
+                    <button class="btn btn-primary" id="addAvailabilityBtn">
+                        <i class="fas fa-plus"></i> Add Availability
+                    </button>
+                </div>
+                <div class="availability-list" id="availabilityList">
+                    <!-- Availability items will be populated by JavaScript -->
+                </div>
+            </section>
+
+            <section class="appointments-section" id="appointments">
+                <div class="section-header">
+                    <h2><i class="fas fa-calendar"></i> Appointment Schedules</h2>
+                    <div class="date-filter">
+                        <input type="date" id="appointmentDate" class="date-picker" placeholder="Select Date">
+                        <select id="appointmentStatus" class="date-picker">
+                            <option value="all">All Status</option>
+                            <option value="pending">Pending</option>
+                            <option value="confirmed">Confirmed</option>
+                            <option value="completed">Completed</option>
+                            <option value="cancelled">Cancelled</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>Patient Name</th>
+                                <th class="hide-mobile">Type</th>
+                                <th class="hide-mobile">Fee</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="appointmentTableBody">
+                            <!-- Appointment data will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="earnings-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-rupee-sign"></i> Quick Earnings</h2>
+                </div>
+                <div class="earnings-stats">
+                    <div class="earnings-card today">
+                        <div class="earnings-info">
+                            <div class="label">Today</div>
+                            <div class="amount" id="todayEarnings">₹0</div>
+                        </div>
+                        <div class="consultations">
+                            <i class="fas fa-user-check"></i>
+                            <span id="todayConsultations">0</span>
+                        </div>
+                    </div>
+                    <div class="earnings-card weekly">
+                        <div class="earnings-info">
+                            <div class="label">This Week</div>
+                            <div class="amount" id="weeklyEarnings">₹0</div>
+                        </div>
+                        <div class="consultations">
+                            <i class="fas fa-user-check"></i>
+                            <span id="weeklyConsultations">0</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Profile Modal -->
+    <div class="modal" id="profileModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Edit Profile</h3>
+                <button class="close-btn" id="closeProfileModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="profileForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="editName">Name</label>
+                            <input type="text" id="editName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editSpeciality">Speciality</label>
+                            <input type="text" id="editSpeciality" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="editExperience">Experience (years)</label>
+                            <input type="number" id="editExperience" min="0" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editPhone">Phone</label>
+                            <input type="tel" id="editPhone" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="editEmail">Email</label>
+                        <input type="email" id="editEmail" required readonly> <!-- Email should generally be read-only -->
+                    </div>
+                    <div class="form-group">
+                        <label for="editAddress">Address</label>
+                        <textarea id="editAddress" required></textarea>
+                    </div>
+                    <div class="modal-actions">
+                        <button type="button" class="btn btn-secondary" id="cancelProfileBtn">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Availability Modal -->
+    <div class="modal" id="availabilityModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="availabilityModalTitle">Add Availability</h3>
+                <button class="close-btn" id="closeAvailabilityModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="availabilityForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="availabilityDate">Date</label>
+                            <input type="date" id="availabilityDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="consultationDuration">Duration (minutes)</label>
+                            <select id="consultationDuration" required>
+                                <option value="15">15 minutes</option>
+                                <option value="30" selected>30 minutes</option>
+                                <option value="45">45 minutes</option>
+                                <option value="60">60 minutes</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="startTime">Start Time</label>
+                            <input type="time" id="startTime" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="endTime">End Time</label>
+                            <input type="time" id="endTime" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="consultationFee">Consultation Fee (₹)</label>
+                        <input type="number" id="consultationFee" min="100" step="50" required>
+                    </div>
+                    <div class="modal-actions">
+                        <button type="button" class="btn btn-secondary" id="cancelAvailabilityBtn">Cancel</button>
+                        <button type="submit" class="btn btn-primary" id="saveAvailabilityBtn">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Appointment Details Modal -->
+    <div class="modal" id="appointmentModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Appointment Details</h3>
+                <button class="close-btn" id="closeAppointmentModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="appointmentDetails">
+                    <!-- Appointment details will be populated by JavaScript -->
+                </div>
+                <div class="modal-actions">
+                    <button class="btn btn-danger" id="cancelAppointmentBtn">Cancel Appointment</button>
+                    <button class="btn btn-primary" id="completeAppointmentBtn">Mark Complete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Prescription Modal -->
+    <div class="modal" id="prescriptionModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Issue New Prescription</h3>
+                <button class="close-btn" id="closePrescriptionModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="prescriptionForm">
+                    <div class="form-group">
+                        <label for="prescriptionPatient">Patient Name *</label>
+                        <select id="prescriptionPatient" required>
+                            <option value="">-- Select Patient --</option>
+                            <!-- Options populated by JS -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="prescriptionMedicines">Medicines (one per line) *</label>
+                        <textarea id="prescriptionMedicines" rows="5" placeholder="e.g.,&#10;Paracetamol 500mg - 1 tab after food&#10;Amoxicillin 250mg - 1 cap twice daily" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="prescriptionNotes">Notes/Instructions</label>
+                        <textarea id="prescriptionNotes" rows="3" placeholder="Any additional notes for the patient or pharmacist"></textarea>
+                    </div>
+                    <div class="modal-actions">
+                        <button type="button" class="btn btn-secondary" id="cancelPrescriptionBtn">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Issue Prescription</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- View Prescription Modal -->
+    <div class="modal" id="viewPrescriptionModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Prescription Details</h3>
+                <button class="close-btn" id="closeViewPrescriptionModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="viewPrescriptionDetails">
+                    <!-- Prescription details will be populated by JavaScript -->
+                </div>
+                <div class="modal-actions">
+                    <button class="btn btn-primary" id="simulateDeliveryBtn">Simulate Medicine Delivery</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification"></div>
+
+    <script src="doctor-profile.js"></script>
+        <!-- Footer -->
+     <footer>
+  <p>© 2025 QuickCare. Making healthcare accessible for everyone.</p>
+</footer>
+
+<style>
+  footer {
+    text-align: center;
+    padding: 30px;
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    color: #fff;
+    font-size: 14px;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  }
+</style>
+</body>
+</html>
